@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+int main() {
+    setlocale(0, "");
+    srand(time(nullptr)); // Инициализация генератора случайных чисел
+
+    int bulletPosition = rand() % 6 + 1; // Случайная позиция пули (от 1 до 6)
+    int playerChoice;
+    int attempts = 0;
+
+    cout << "Добро пожаловать в игру Русская рулетка!" << endl;
+    cout << "Правила просты: у вас есть 6 патронов в барабане. Одна из пуль заряжена." << endl;
+    cout << "Ваша задача - избежать выстрела." << endl;
+
+    do {
+        cout << endl;
+        cout << "Выберите позицию (1-6), чтобы выстрелить: ";
+        cin >> playerChoice;
+
+        // Проверка допустимости выбора
+        if (playerChoice < 1 || playerChoice > 6) {
+            cout << "Недопустимый выбор. Введите число от 1 до 6." << endl;
+            continue;
+        }
+
+        attempts++;
+
+        // Проверяем, попался ли патрон
+        if (playerChoice == bulletPosition) {
+           cout << "Пуля выстрелена! Вы проиграли!" << endl;
+            break;
+        }
+        else {
+           cout << "Клик! Вы выжили." << endl;
+        }
+    } while (attempts < 6);
+
+    if (attempts == 6) {
+        cout << "Вы прошли все 6 раундов без проигрыша. Поздравляем, вы выиграли!" << endl;
+    }
+
+    return 0;
+}
